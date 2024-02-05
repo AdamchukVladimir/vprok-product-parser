@@ -36,8 +36,9 @@ async function createProductDirectory(region, productName) {
 	// Формирую название папки до символа "-" и без спец символов
 	const firstPart = productName.split("-")[0].trim();
 	const cleanProductName = firstPart.replace(/[^\w\sа-яА-Я]/g, "");
+	const sanitizedRegion = region.replace(/\./g, "_");
 
-	const dirPath = path.join(baseDir, region, cleanProductName);
+	const dirPath = path.join(baseDir, sanitizedRegion, cleanProductName);
 	await fs.mkdir(dirPath, { recursive: true });
 	return dirPath;
 }
